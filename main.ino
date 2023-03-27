@@ -128,8 +128,9 @@ void loop(){
       
     	case 30:           //comeca a subtracao
         
-      		if(ultimo1 == 1){
-      			SubtracaoD();
+      	    if(ultimo1 == 1){
+      		SubtracaoD();
+		    
             }else{
             	SubtracaoF();
             }
