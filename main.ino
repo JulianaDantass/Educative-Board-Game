@@ -46,8 +46,9 @@ void setup() {
   Serial.begin(9600);
   randomSeed(analogRead(A0));
   lcd.begin(16, 2);
+  digitado= "";
   
-  ///////////////////////////////////what the display shows in the beggining of the game
+  /////////////////////////////////// what the display shows in the beggining of the game
   lcd.setCursor(0, 0);
   lcd.print("-THINK MATH RUN-");
   delay(3000);
@@ -67,17 +68,24 @@ void setup() {
   lcd.clear();
   /////////////////////////////////////////////
   
-  digitado= "";
 }
 
 void loop(){
   
   int quemJoga;
   
-  quemJoga= Jogador(i);
-  
+  ////////////////////////////// just a piece of the code to alternate between the players. if "i" is odd then is player1 turn  //  "i" is pair then is player1 turn   
+  if(i % 2 != 0){
+  	quemJoga = 1;
+  }else{
+  	quemJoga = 2;
+  }           
+  //////////////////////////////
+
+
   if(pontos1 == 120 && quemJoga == 1){
     
+      //just one exception
    
   }else{
       lcd.setCursor(0, 0);
@@ -110,41 +118,42 @@ void loop(){
     
     switch(pontos1){
       
-    	case 0:           //the player 1 begin in the "hard path"
+    	case 0:           /**********the player 1 begin in the "hard path" resolving SUM********/ 
+
       		if(ultimo1 == 1){
-              SomaD();
-            }else{      //if player 1" give the wrong answer previously, they go to the first question of the "easy path"
-              SomaF();
+              SomaD();    //first and unic question of the "hard path"
+            }else{      
+              SomaF();   //if player 1" give the wrong answer previously, they go to the first question of the "easy path"
             }
       		break;
       
-      	case 10:
+      case 10:
       		SomaF();    //second question of the "easy path" if the p1 gave the right answer
       		break;
       
-      	case 20:
+      case 20:
       		SomaF();    //third question of the "easy path" if the p1 gave the right answer
       		break;
       
-    	case 30:           //comeca a subtracao
+    	case 30:          /**********the player 1 returns to the "hard path" resolving  SUBTRACTION********/ 
         
       	    if(ultimo1 == 1){
-      		SubtracaoD();
+      		    SubtracaoD();
 		    
             }else{
-            	SubtracaoF();
+            	SubtracaoF();   
             }
       		break;
       
-      	case 40:
+      case 40:
       		SubtracaoF();
       		break;
       
-      	case 50:
+      case 50:
       		SubtracaoF();
       		break; 
       
-      	case 60:           //comeca a multiplicacao
+      case 60:           /**********the player 1 returns to the "hard path" resolving  MULTIPLICATION********/ 
       		if(ultimo1 == 1){
       			MultiplicacaoD();
             }else{
@@ -152,15 +161,15 @@ void loop(){
             }
       		break;
       
-      	case 70:
+      case 70:
       		MultiplicacaoF();
       		break; 
       
-      	case 80:
+      case 80:
       		MultiplicacaoF();
       		break; 
       
-      	case 90:          //comeca a divisao
+      case 90:          /**********the player 1 returns to the "hard path" resolving  DIVISION********/ 
       		if(ultimo1 == 1){
       			DivisaoD();
             }else{
@@ -168,14 +177,15 @@ void loop(){
             }
       		break;
       
-      	case 100:
+      case 100:
       		DivisaoF();
       		break;
       
-      	case 110:
+      case 110:
       		DivisaoF();
       		break;
-      	case 120:
+
+      case 120:
       		if (pontos1 > pontos2){
               lcd.setCursor(0, 0);
   			  lcd.print("O JOGADOR 1");
@@ -207,11 +217,11 @@ void loop(){
     }
   
  
-  }else{       //quem joga é jogador 2
+  }else{      //same thing but for the SECOND PLAYER
   	
-     switch(pontos2){
+     switch(pontos2){     
        
-    	case 0:           //comeca a soma
+    	case 0:           /**********the player 2 begin in the "hard path" resolving SUM********/ 
       		if(ultimo2 == 1){
               SomaD();
             }else{
@@ -227,7 +237,7 @@ void loop(){
       		SomaF();
       		break;
       
-    	case 30:           //comeca a subtracao
+    	case 30:           /**********the player 2 begin in the "hard path" resolving SUBTRACION********/ 
       		if(ultimo2 == 1){
       			SubtracaoD();
             }else{
@@ -243,7 +253,7 @@ void loop(){
       		SubtracaoF();
       		break; 
       
-      	case 60:           //comeca a multiplicacao
+      	case 60:          /**********the player 2 begin in the "hard path" resolving MULTIPLICATION********/ 
       		if(ultimo2 == 1){
       			MultiplicacaoD();
             }else{
@@ -259,7 +269,7 @@ void loop(){
       		MultiplicacaoF();
       		break; 
       
-      	case 90:          //comeca a divisao
+      	case 90:           /**********the player 2 begin in the "hard path" resolving DIVISION********/ 
       		if(ultimo2 == 1){
       			DivisaoD();
               	if(ultimo2 == 1){
@@ -281,7 +291,7 @@ void loop(){
             }
       		break;
       
-      	case 100:
+        case 100:
       		DivisaoF();
       		break;
       
@@ -302,36 +312,36 @@ void loop(){
     }
   }
   
-  i++;  
+  i++;           //increase the counter that is responsible for alternate the turns
  }
   
 
-void Verifica(String digitado, String resultado, int caminho){
+void Verifica(String digitado, String resultado, int caminho){      //this function gets the answer from the user and checks it
 
   int posicaoPonto;
   char ponto= '.';
   
   while(1){
-  lcd.setCursor(0, 1);
-  char key = keypad.getKey();
+    lcd.setCursor(0, 1);
+    char key = keypad.getKey();       //the keypad waits for the user to press a key
     
-    if(key == '*'){
-      	digitado += ".00";
+    if(key == '*'){           //if the key is "*" means the user have a final answer and it breaks the while
+      digitado += ".00";      //this is just an adaptation to make more easier the comparation between "user's answer" and the "final answer"
     	break;
     }
   
-  	if(key != NO_KEY){
+  	if(key != NO_KEY){       //if any key was pressed, then it will appear on display.  (OBS.: We don't have the feature to delete a key)
       digitado += key;
       lcd.print(digitado);
     }
   }
   
-  if (digitado == resultado){
+  if (digitado == resultado){    //if the result is correct
   	lcd.clear();
     lcd.setCursor(0, 0);
   	lcd.print("CORRETO!");
     
-    //buzzer correto
+    /////////////////////////////// if the result is correct, this is the buzzer sound: 
     tone(buzzer, 730, 400);
     delay(300);
     noTone(buzzer);
@@ -344,59 +354,66 @@ void Verifica(String digitado, String resultado, int caminho){
     
     lcd.clear();
     
-    if(i % 2 != 0){       //quando o jogador 1 acerta
+    if(i % 2 != 0){       //if the turn is of player1
       ultimo1 = 1;
       acertos1 += 1;
       
-      if(caminho == 1){   //se vier pelo caminho dificil
+      
+      if(caminho == 1){        //if it came from the "hard path"
       	lcd.setCursor(0, 0);
-  		lcd.print("AVANCE 1 CASA");
+  		  lcd.print("AVANCE 1 CASA");
         delay(3000);
         lcd.clear();
-        pontos1 += 30;
-      }else{              //se vier pelo caminho facil
-      	if(acertos1 == 3){
-          lcd.setCursor(0, 0);
-  		  lcd.print("VA PARA O");
+        pontos1 += 30;         //the player gets +30 points
+
+
+      }else{                  //if it came from the "easy path"
+
+        lcd.setCursor(0, 0);
+
+      	if(acertos1 == 3){        //if is the last question, a mensage will appear to change the path      
+          lcd.print("VA PARA O");
           lcd.setCursor(0, 1);
-  		  lcd.print("CURTO");
-          delay(3000);
-          lcd.clear();
-          pontos1 += 10;  
+          lcd.print("CURTO");
           acertos1 = 0;
+
         }else{
         	lcd.setCursor(0, 0);
-  			lcd.print("AVANCE 1 CASA");
-        	delay(3000);
-        	lcd.clear();
-        	pontos1 += 10;
+  			  lcd.print("AVANCE 1 CASA");
         }
+
+        delay(3000);
+        lcd.clear();
+        pontos1 += 10;
       }
       
-    }else{                //quando o jogador 2 acerta
+    }else{                //if the turn is of player2
       ultimo2 = 1;
       acertos2 += 1;
       
       if(caminho == 1){   //se vier pelo caminho dificil
       	lcd.setCursor(0, 0);
-  		lcd.print("AVANCE 1 CASA");
+  		  lcd.print("AVANCE 1 CASA");
         delay(3000);
         lcd.clear();
        	pontos2 += 30;
         acertos2 = 0;
+
       }else{              //se vier pelo caminho facil
       	if(acertos2 == 3){
+
           lcd.setCursor(0, 0);
-  		  lcd.print("VA PARA O");
+  		    lcd.print("VA PARA O");
           lcd.setCursor(0, 1);
-  		  lcd.print("CURTO");
+  		    lcd.print("CURTO");
           delay(3000);
           lcd.clear();
           pontos2 += 10;  
           acertos2 = 0;
         }else{
+
         	lcd.setCursor(0, 0);
-  			lcd.print("AVANCE 1 CASA");
+  			  lcd.print("AVANCE 1 CASA");
         	delay(3000);
         	lcd.clear();
         	pontos2 += 10;
@@ -463,16 +480,6 @@ void Verifica(String digitado, String resultado, int caminho){
     
   }
   
-}
-  
-  
-int Jogador(int contador){ 
-  
-  if(contador % 2 != 0){
-  	return 1;
-  }else{
-  	return 2;
-  }
 }
  
 void SomaD (){  //funcao soma dificil
