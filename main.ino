@@ -121,18 +121,18 @@ void loop(){
     	case 0:           /**********the player 1 begin in the "hard path" resolving SUM********/ 
 
       		if(ultimo1 == 1){
-              SomaD();    //first and unic question of the "hard path"
+              Soma(1);    //first and unic question of the "hard path"
             }else{      
-              SomaF();   //if player 1" give the wrong answer previously, they go to the first question of the "easy path"
+              Soma(2);   //if player 1" give the wrong answer previously, they go to the first question of the "easy path"
             }
       		break;
       
       case 10:
-      		SomaF();    //second question of the "easy path" if the p1 gave the right answer
+      		Soma(2);    //second question of the "easy path" if the p1 gave the right answer
       		break;
       
       case 20:
-      		SomaF();    //third question of the "easy path" if the p1 gave the right answer
+      		Soma(2);    //third question of the "easy path" if the p1 gave the right answer
       		break;
       
     	case 30:          /**********the player 1 returns to the "hard path" resolving  SUBTRACTION********/ 
@@ -400,15 +400,16 @@ void Verifica(String digitado, String resultado, int caminho){      //this funct
         acertos2 = 0;
 
       }else{              //se vier pelo caminho facil
-      	if(acertos2 == 3){
 
-          lcd.setCursor(0, 0);
+      lcd.setCursor(0, 0);
+      	if(acertos2 == 3){
+          
   		    lcd.print("VA PARA O");
           lcd.setCursor(0, 1);
   		    lcd.print("CURTO");
           delay(3000);
           lcd.clear();
-          pontos2 += 10;  
+           
           acertos2 = 0;
         }else{
 
@@ -416,8 +417,9 @@ void Verifica(String digitado, String resultado, int caminho){      //this funct
   			  lcd.print("AVANCE 1 CASA");
         	delay(3000);
         	lcd.clear();
-        	pontos2 += 10;
+    
         }
+        pontos2 += 10; 
       }
     }
     
@@ -482,16 +484,25 @@ void Verifica(String digitado, String resultado, int caminho){      //this funct
   
 }
  
-void SomaD (){  //funcao soma dificil
+void Soma (int cam){  //sum 
 	
   int parcela1, parcela2;
   float resul;
-  int caminho= 1;
   
-  parcela1= random(199, 899);
-  delay(1000);
-  parcela2= random(199, 899);
-  delay(1000);
+  if(cam == 1){  //hard path (the sum is more complicated)
+
+    parcela1= random(199, 899);
+    delay(1000);
+    parcela2= random(199, 899);
+    delay(1000);
+
+  }else{                       //easy path
+    parcela1= random(10, 99);
+    delay(1000);
+    parcela2= random(10, 99);
+    delay(1000);
+  }
+
       
   lcd.setCursor(0, 0);
   lcd.print(parcela1);
@@ -504,44 +515,32 @@ void SomaD (){  //funcao soma dificil
   Verifica(digitado, resultado, caminho);
 }
 
-void SomaF (){     //funcao soma facil
+void SubtracaoD(int cam){   //subtraction 
 	
   int parcela1, parcela2;
   float resul;
-  int caminho= 2;
-  
-  parcela1= random(10, 99);
-  delay(1000);
-  parcela2= random(10, 99);
-  delay(1000);
-      
-  lcd.setCursor(0, 0);
-  lcd.print(parcela1);
-  lcd.print("+");
-  lcd.print(parcela2);
-  lcd.print("=");
-  
-  resul= parcela1 + parcela2;
-  String resultado= String(resul);
-  Verifica(digitado, resultado, caminho);
-}
 
-void SubtracaoD(){   //funcao subtracao dificil
-	
-  int parcela1, parcela2;
-  float resul;
-  int caminho= 1;
-  
-  parcela1= random(101, 899);
-  delay(1000);
-  parcela2= random(101, 899);
-  delay(1000);
-  
-  if(parcela1 > parcela2){
+  if(cam == 1){  //hard path
+
+    parcela1= random(101, 899);
+    delay(1000);
+    parcela2= random(101, 899);
+    delay(1000);
+
+  }else{    //easy path
+
+    parcela1= random(10, 99);
+    delay(1000);
+    parcela2= random(10, 99);
+    delay(1000);
+
+  }
+
+  if(parcela1 > parcela2){      //just to unable a negative result
   	lcd.setCursor(0, 0);
   	lcd.print(parcela1);
   	lcd.print("-");
- 	lcd.print(parcela2);
+ 	  lcd.print(parcela2);
   	lcd.print("=");
       
   	resul= parcela1 - parcela2;
@@ -550,7 +549,7 @@ void SubtracaoD(){   //funcao subtracao dificil
     lcd.setCursor(0, 0);
   	lcd.print(parcela2);
   	lcd.print("-");
- 	lcd.print(parcela1);
+ 	  lcd.print(parcela1);
   	lcd.print("=");
     
     resul= parcela2 - parcela1;
@@ -561,131 +560,63 @@ void SubtracaoD(){   //funcao subtracao dificil
   Verifica(digitado, resultado, caminho);
 } 
 
-void SubtracaoF(){   //funcao subtracao facil
+
+      
+void Multiplicacao(int cam){   //multiplication 
 	
   int parcela1, parcela2;
   float resul;
-  int caminho= 2;
-  
-  parcela1= random(10, 99);
-  delay(1000);
-  parcela2= random(10, 99);
-  delay(1000);
-  
-  if(parcela1 > parcela2){
-  	lcd.setCursor(0, 0);
-  	lcd.print(parcela1);
-  	lcd.print("-");
- 	lcd.print(parcela2);
-  	lcd.print("=");
-      
-  	resul= parcela1 - parcela2;
+
+  if(cam == 1){
+
+    parcela1= random(199, 499);
+    delay(1000);
+    parcela2= random(3, 9);
+    delay(1000);
+
   }else{
-    lcd.setCursor(0, 0);
-  	lcd.print(parcela2);
-  	lcd.print("-");
- 	lcd.print(parcela1);
-  	lcd.print("=");
-    
-    resul= parcela2 - parcela1;
-  }
-  
-  String resultado= String(resul);
-  digitado= "";
-  Verifica(digitado, resultado, caminho);
-}  
-      
-void MultiplicacaoD(){   //multiplicacao dificil
-	
-  int parcela1, parcela2;
-  float resul;
-  int caminho= 1;
-  
-  parcela1= random(199, 499);
-  delay(1000);
-  parcela2= random(3, 9);
-  delay(1000);
-  
-  lcd.setCursor(0, 0);
-  lcd.print(parcela1);
-  lcd.print("x");
-  lcd.print(parcela2);
-  lcd.print("=");
-      
-  resul= parcela1 * parcela2;
-  
-  String resultado= String(resul);
-  digitado= "";
-  Verifica(digitado, resultado, caminho);
-}  
-
-void MultiplicacaoF(){  //multiplicacao facil
-	
-  int parcela1, parcela2;
-  float resul;
-  int caminho= 2;
-  
-  parcela1= random(11, 99);
-  delay(1000);
-  parcela2= random(2, 10);
-  delay(1000);
-  
-  lcd.setCursor(0, 0);
-  lcd.print(parcela1);
-  lcd.print("x");
-  lcd.print(parcela2);
-  lcd.print("=");
-      
-  resul= parcela1 * parcela2;
-  
-  String resultado= String(resul);
-  digitado= "";
-  Verifica(digitado, resultado, caminho);
-}
-
-void DivisaoD(){    //divisao dificil
-	
-  int parcela1, parcela2;
-  float resul;
-  int caminho= 1;
-  
-  while(1){
-    
-    parcela1= random(40, 500);
-    delay(50);
-    parcela2= random(5, 40);
-    delay(50);
-    
-    if(parcela1 > parcela2 && parcela1 % parcela2 == 0){
-      	resul= parcela1 / parcela2;
-    	break;	
-    }
-    
-  }
-  
-  lcd.setCursor(0, 0);
-  lcd.print(parcela1);
-  lcd.print("/");
-  lcd.print(parcela2);
-  lcd.print("=");
-      
-  
-  String resultado= String(resul);
-  digitado= "";
-  Verifica(digitado, resultado, caminho);
-}  
-  
-void DivisaoF(){      //divisao facil
-	
-  int parcela1, parcela2;
-  float resul;
-  int caminho= 2;
-  
-  while(1){
-    parcela1= random(10, 99);
-    delay(50);
+    parcela1= random(11, 99);
+    delay(1000);
     parcela2= random(2, 10);
-    delay(50);
+    delay(1000);
+  }
+  
+  lcd.setCursor(0, 0);
+  lcd.print(parcela1);
+  lcd.print("x");
+  lcd.print(parcela2);
+  lcd.print("=");
+      
+  resul= parcela1 * parcela2;
+  
+  String resultado= String(resul);
+  digitado= "";
+  Verifica(digitado, resultado, caminho);
+}  
+
+
+void Divisao(int cam){    //division
+	
+  int parcela1, parcela2;
+  float resul;
+  int flag;
+
+
+  while(1){
+    
+    if(cam == 1){        //hard path
+
+      parcela1= random(40, 500);
+      delay(50);
+      parcela2= random(5, 40);
+      delay(50);
+    }else{               //easy path
+
+      parcela1= random(10, 99);
+      delay(50);
+      parcela2= random(2, 10);
+      delay(50);
+    }
     
     if(parcela1 > parcela2 && parcela1 % parcela2 == 0){
       	resul= parcela1 / parcela2;
@@ -693,6 +624,7 @@ void DivisaoF(){      //divisao facil
     }
     
   }
+  
   lcd.setCursor(0, 0);
   lcd.print(parcela1);
   lcd.print("/");
@@ -704,6 +636,7 @@ void DivisaoF(){      //divisao facil
   digitado= "";
   Verifica(digitado, resultado, caminho);
 }  
+  
 
 void Reiniciar(){
   
