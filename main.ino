@@ -138,69 +138,67 @@ void loop(){
     	case 30:          /**********the player 1 returns to the "hard path" resolving  SUBTRACTION********/ 
         
       	    if(ultimo1 == 1){
-      		    SubtracaoD();
+      		    Subtracao(1);
 		    
             }else{
-            	SubtracaoF();   
+            	Subtracao(2);   
             }
       		break;
       
       case 40:
-      		SubtracaoF();
+      		Subtracao(2);
       		break;
       
       case 50:
-      		SubtracaoF();
+      		Subtracao(2);
       		break; 
       
       case 60:           /**********the player 1 returns to the "hard path" resolving  MULTIPLICATION********/ 
       		if(ultimo1 == 1){
-      			MultiplicacaoD();
+      			Multiplicacao(1);
             }else{
-            	MultiplicacaoF();
+            	Multiplicacao(2);
             }
       		break;
       
       case 70:
-      		MultiplicacaoF();
+      		Multiplicacao(2);
       		break; 
       
       case 80:
-      		MultiplicacaoF();
+      		Multiplicacao(2);
       		break; 
       
       case 90:          /**********the player 1 returns to the "hard path" resolving  DIVISION********/ 
       		if(ultimo1 == 1){
-      			DivisaoD();
+      			Divisao(1);
             }else{
-            	DivisaoF();
+            	Divisao(2);
             }
       		break;
       
       case 100:
-      		DivisaoF();
+      		Divisao(2);
       		break;
       
       case 110:
-      		DivisaoF();
+      		Divisao(2);
       		break;
 
       case 120:
       		if (pontos1 > pontos2){
               lcd.setCursor(0, 0);
-  			  lcd.print("O JOGADOR 1");
+  			      lcd.print("O JOGADOR 1");
               lcd.setCursor(0, 1);
               lcd.print("VENCEU");
               delay(6000);
               lcd.clear();
-              i= 0;
-              pontos1= 0;
-              pontos2= 0;
+              
               Reiniciar();
             }else{
               if(pontos1 == pontos2){
               	lcd.setCursor(0, 0);
-  			  	lcd.print("EMPATE");
+  			  	    lcd.print("EMPATE");
               	delay(4000);
               	lcd.clear();
                 lcd.setCursor(0, 0);
@@ -223,90 +221,89 @@ void loop(){
        
     	case 0:           /**********the player 2 begin in the "hard path" resolving SUM********/ 
       		if(ultimo2 == 1){
-              SomaD();
+              Soma(1);
             }else{
-              SomaF();
+              Soma(2);
             }
       		break;
       
       	case 10:
-      		SomaF();
+      		Soma(2);
       		break;
       
       	case 20:
-      		SomaF();
+      		Soma(2);
       		break;
       
     	case 30:           /**********the player 2 begin in the "hard path" resolving SUBTRACION********/ 
       		if(ultimo2 == 1){
-      			SubtracaoD();
+      			Subtracao(1);
             }else{
-            	SubtracaoF();
+            	Subtracao(2);
             }
       		break;
       
       	case 40:
-      		SubtracaoF();
+      		Subtracao(2);
       		break;
       
       	case 50:
-      		SubtracaoF();
+      		Subtracao(2);
       		break; 
       
       	case 60:          /**********the player 2 begin in the "hard path" resolving MULTIPLICATION********/ 
       		if(ultimo2 == 1){
-      			MultiplicacaoD();
+      			Multiplicacao(1);
             }else{
-            	MultiplicacaoF();
+            	Multiplicacao(2);
             }
       		break;
       
       	case 70:
-      		MultiplicacaoF();
+      		Multiplicacao(2);
       		break; 
       
       	case 80:
-      		MultiplicacaoF();
+      		Multiplicacao(2);
       		break; 
       
       	case 90:           /**********the player 2 begin in the "hard path" resolving DIVISION********/ 
       		if(ultimo2 == 1){
-      			DivisaoD();
-              	if(ultimo2 == 1){
-              		if(pontos2 > pontos1){
-                      lcd.setCursor(0, 0);
-                      lcd.print("O JOGADOR 2");
-                      lcd.setCursor(0, 1);
-                      lcd.print("VENCEU");
-                      delay(6000);
-                      lcd.clear();
-                      i=0;
-                      pontos1= 0;
-                      pontos2= 0;
-                      Reiniciar();
-            		}
-              	}
-            }else{
-            	DivisaoF();
+      			Divisao(1);
+
+            if(ultimo2 == 1){
+              if(pontos2 > pontos1){
+                lcd.setCursor(0, 0);
+                lcd.print("O JOGADOR 2");
+                lcd.setCursor(0, 1);
+                lcd.print("VENCEU");
+                delay(6000);
+                lcd.clear();
+                Reiniciar();
+            	}
             }
+
+          }else{
+            Divisao(2);
+          }
       		break;
       
         case 100:
-      		DivisaoF();
+      		Divisao(2);
       		break;
       
       	case 110:
-      		DivisaoF();
+      		Divisao(2);
        		if(pontos2 > pontos1){
-              lcd.setCursor(0, 0);
-  			  lcd.print("O JOGADOR 2");
-              lcd.setCursor(0, 1);
-  			  lcd.print("VENCEU");
-              delay(6000);
-              lcd.clear();
+            lcd.setCursor(0, 0);
+  			    lcd.print("O JOGADOR 2");
+            lcd.setCursor(0, 1);
+  			    lcd.print("VENCEU");
+            delay(6000);
+            lcd.clear();
               
-              Reiniciar();
-            }
+            Reiniciar();
+          }
       		break;
        		
     }
@@ -515,7 +512,7 @@ void Soma (int cam){  //sum
   Verifica(digitado, resultado, caminho);
 }
 
-void SubtracaoD(int cam){   //subtraction 
+void Subtracao(int cam){   //subtraction 
 	
   int parcela1, parcela2;
   float resul;
@@ -559,7 +556,6 @@ void SubtracaoD(int cam){   //subtraction
   digitado= "";
   Verifica(digitado, resultado, caminho);
 } 
-
 
       
 void Multiplicacao(int cam){   //multiplication 
