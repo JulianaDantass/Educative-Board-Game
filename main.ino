@@ -5,6 +5,7 @@
 
 #define buzzer A5
 
+
 // initialize the library with the numbers of the interface pins
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
@@ -193,7 +194,7 @@ void loop(){
               lcd.print("VENCEU");
               delay(6000);
               lcd.clear();
-              
+
               Reiniciar();
             }else{
               if(pontos1 == pontos2){
@@ -337,34 +338,33 @@ void Verifica(String digitado, String resultado, int caminho){      //this funct
   	lcd.clear();
     lcd.setCursor(0, 0);
   	lcd.print("CORRETO!");
-    
-    /////////////////////////////// if the result is correct, this is the buzzer sound: 
-    tone(buzzer, 730, 400);
-    delay(300);
-    noTone(buzzer);
-    tone(buzzer, 630, 600);
-    delay(500);
-    noTone(buzzer);
-    tone(buzzer, 530, 300);
-    delay(200);
-    
-    
+    Logica_Buzzer(1);
     lcd.clear();
+    
     
     if(i % 2 != 0){       //if the turn is of player1
       ultimo1 = 1;
       acertos1 += 1;
+    }else{
+       ultimo2 = 1;
+      acertos2 += 1;
+    }
       
       
-      if(caminho == 1){        //if it came from the "hard path"
+    if(caminho == 1){        //if it came from the "hard path"
       	lcd.setCursor(0, 0);
   		  lcd.print("AVANCE 1 CASA");
         delay(3000);
         lcd.clear();
-        pontos1 += 30;         //the player gets +30 points
 
+        if(i % 2 == 0){
+          pontos1 += 30;        
+        }else{
+          pontos2 += 30;
+          acertos2 = 0;
+        }
 
-      }else{                  //if it came from the "easy path"
+    }else{                  //if it came from the "easy path"
 
         lcd.setCursor(0, 0);
 
@@ -372,68 +372,38 @@ void Verifica(String digitado, String resultado, int caminho){      //this funct
           lcd.print("VA PARA O");
           lcd.setCursor(0, 1);
           lcd.print("CURTO");
-          acertos1 = 0;
 
-        }else{
-        	lcd.setCursor(0, 0);
-  			  lcd.print("AVANCE 1 CASA");
-        }
-
-        delay(3000);
-        lcd.clear();
-        pontos1 += 10;
-      }
-      
-    }else{                //if the turn is of player2
-      ultimo2 = 1;
-      acertos2 += 1;
-      
-      if(caminho == 1){   //se vier pelo caminho dificil
-      	lcd.setCursor(0, 0);
-  		  lcd.print("AVANCE 1 CASA");
-        delay(3000);
-        lcd.clear();
-       	pontos2 += 30;
-        acertos2 = 0;
-
-      }else{              //se vier pelo caminho facil
-
-      lcd.setCursor(0, 0);
-      	if(acertos2 == 3){
+          if(i % 2 == 0){
+            acertos1 = 0;
+          }else{
+            acertos2 = 0;
+          }
           
-  		    lcd.print("VA PARA O");
-          lcd.setCursor(0, 1);
-  		    lcd.print("CURTO");
-          delay(3000);
-          lcd.clear();
-           
-          acertos2 = 0;
-        }else{
 
+        }else{
         	lcd.setCursor(0, 0);
   			  lcd.print("AVANCE 1 CASA");
-        	delay(3000);
-        	lcd.clear();
-    
         }
-        pontos2 += 10; 
+
+        delay(3000);
+        lcd.clear();
+
+        if(i % 2 == 0){
+          pontos1 += 10;
+        }else{
+          pontos2 += 10;
+        }
+        
       }
-    }
-    
+      
+  
   }else{
     lcd.clear();
     lcd.setCursor(0, 0);
   	lcd.print("INCORRETO!");
     
     //buzzer incorreto
-    tone(buzzer, 240, 200);
-    delay(200);
-    noTone(buzzer);
-    tone(buzzer, 290, 200);
-    delay(200);
-    noTone(buzzer);
-    tone(buzzer, 320, 600);
-    delay(600);
+    Logica_Buzzer(0);
     
     
     //printar o resultado certo
@@ -632,7 +602,32 @@ void Divisao(int cam){    //division
   digitado= "";
   Verifica(digitado, resultado, caminho);
 }  
-  
+
+void Logica_Buzzer(int correto){          //just a function that controls the sound of the buzzer
+
+  if(correto == 1){
+
+    tone(buzzer, 730, 400);
+    delay(300);
+    noTone(buzzer);
+    tone(buzzer, 630, 600);
+    delay(500);
+    noTone(buzzer);
+    tone(buzzer, 530, 300);
+    delay(200);
+
+  }else{
+
+    tone(buzzer, 240, 200);
+    delay(200);
+    noTone(buzzer);
+    tone(buzzer, 290, 200);
+    delay(200);
+    noTone(buzzer);
+    tone(buzzer, 320, 600);
+    delay(600);
+  }
+}
 
 void Reiniciar(){
   
