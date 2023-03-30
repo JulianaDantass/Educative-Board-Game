@@ -8,6 +8,6 @@
 
 * **COMO JOGAR**:
 
-  ###### O jogo, apelidado de "Think Math Run", é disputado por dois jogadores por vez. O objetivo é responder contas de aritmética simples, soma, subtração, multiplicação e divisão, nesta ordem. Há duas possibilidades de caminhos para os jogadores chegarem no fim do jogo, o caminho curto (que também é chamado de "caminho difícil", pois as contas têm um nível mais alto) e o caminho mais longo (que possui contas mais fáceis de resolver). 
-  ###### Todos os jogadores começam no caminho difícil e, se errarem, são desviados para o caminho fácil. A cada nova "seção" aritmética, o jogador, mesmo tendo errado a questão difícil da seção anterior e ter terminado no fácil, pode voltar para o caminho difícil da nova seção e tentar responder a questão corretamente. Vence o jogador que chegar primeiro ao fim. 
+  ###### "Think Math Run" é um jogo para dois jogadores que competem entre si. O objetivo do jogo é resolver operações matemáticas simples de soma, subtração, multiplicação e divisão, nessa ordem específica. Existem dois caminhos possíveis para os jogadores chegarem ao final do jogo: um caminho curto e mais difícil, e um caminho mais longo e mais fácil.
+  ###### Todos os jogadores começam pelo caminho mais difícil, que possui operações mais complexas. Nesse caminho, só existe uma única questão. Se um jogador errar uma operação nesse caminho, será direcionado para o caminho mais fácil, com operações mais simples, mas terá que responder três questões. No entanto, a cada nova seção aritmética, mesmo que o jogador tenha terminado a seção anterior no caminho fácil, ele ainda pode tentar responder a próxima seção no caminho mais difícil. O vencedor é o jogador que chegar primeiro ao final do jogo.
 
