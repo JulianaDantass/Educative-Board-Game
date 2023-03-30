@@ -22,5 +22,7 @@
   
   ###### -O jogo segue iterativamente. Independentemente de o "Jogador 1" acertar ou não, a próxima vez será do "Jogador 2". Tudo isso será indicado no display e deve ser seguido.
   
+  
+ * **SIMULAÇÃO DO CIRCUITO**:
 
 
