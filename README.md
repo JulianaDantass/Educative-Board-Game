@@ -13,7 +13,7 @@
   
 * **COMO JOGAR**:
  
-  ###### - O jogo começa com um jogador, que deve ser definido pelos próprios jogadores. O fato de iniciar não oferece vantagem para o jogador. O primeiro a jogar será referenciado pelo resto do jogo como "Jogador 1" e o segundo como "Jogador 2" pelo display;
+   ###### O jogo começa com um jogador, que deve ser definido pelos próprios jogadores. O fato de iniciar não oferece vantagem para o jogador. O primeiro a jogar será referenciado pelo resto do jogo como "Jogador 1" e o segundo como "Jogador 2" pelo display;
   
   ###### - No display aparecerá a primeira operação para ser resolvida pelo "Jogador 1". Como definiu-se pela lógica do jogo, o display mostrará uma conta do primeiro estágio, ou seja, de soma no nível difícil;
   
@@ -26,6 +26,12 @@
   
  * **SIMULAÇÃO DO CIRCUITO**:
 
-<p align="center">
-  <img src="img/circuito.png" width="400px"/>
-</p>
+   ###### Para o projeto foram usados: Arduino UNO R3, tela LCD 16x2, teclado 4x4, piezo, potenciômetro.
+
+  <p align="center">
+    <img src="img/circuito.png" width="400px"/>
+  </p>
+
+
+*Link para o projeto no Tinkercad:*  [https://www.tinkercad.com/things/0AWiSFo17gY](URL)
+
