@@ -27,5 +27,5 @@
  * **SIMULAÇÃO DO CIRCUITO**:
 
 <p align="center">
-  <img src="img/design.png" />
+  <img src="img/circuito.png" />
 </p>
